@@ -1,4 +1,6 @@
 from pydantic import BaseModel
+from typing import List, Optional
+from datetime import datetime
 
 class PostBase(BaseModel):
     title: str
@@ -13,6 +15,13 @@ class PostUpdate(PostBase):
 class PostResponse(PostBase):
     id: int
     author_id: int
+    created_at: datetime
 
     class Config:
         from_attributes = True
+
+class PaginatedPost(BaseModel):
+    total: int
+    posts: List[PostResponse]
+
+    
